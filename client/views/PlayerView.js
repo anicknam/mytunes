@@ -10,8 +10,11 @@ var PlayerView = Backbone.View.extend({
   },
 
   setSong: function(song) {
-    this.model = song;
-    this.render();
+    // do not re-render if the song is the same
+    if (this.model !== song) {
+      this.model = song;
+      this.render();
+    }
   },
 
   render: function() {

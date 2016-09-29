@@ -1,0 +1,13 @@
+
+.song-name-view {
+  display: inline-block;
+}
+
+.remove-song {
+  padding-right: 0.5em;
+  color: rgba(233, 168, 153, 0.5);
+}
+
+.remove-song:hover {
+  color: rgb(230, 0, 0);
+}
