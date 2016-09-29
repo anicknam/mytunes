@@ -1,13 +1,52 @@
-
+html {
+  font-family: 'Lato', sans-serif;
+}
 .song-name-view {
   display: inline-block;
 }
 
 .remove-song {
-  padding-right: 0.5em;
+  margin-right: 0.5em;
   color: rgba(233, 168, 153, 0.5);
+
 }
 
 .remove-song:hover {
   color: rgb(230, 0, 0);
+}
+
+audio {
+  width: 60%;
+}
+
+.enqueue-song {
+  margin-right: 0.5em;
+  color: rgba(65,174,75,0.5);
+}
+
+.enqueue-song:hover {
+  color: rgb(65,174,75);
+}
+
+.clear-queue {
+  font-weight: 100;
+  font-size: 80%;
+  margin-left: 1em;
+  color: rgba(174,174,174,0.8);
+}
+
+.clear-queue:hover {
+  color: rgba(150,150,150,1);
+}
+
+.move-song-up {
+  margin-right: 1em;
+}
+
+.move-song-up:hover, .move-song-down:hover {
+  opacity: 1;
+}
+
+.move-song-up, .move-song-down {
+  opacity: 0.3;
 }

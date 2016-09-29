@@ -16,7 +16,7 @@ var AppModel = Backbone.Model.extend({
       this.set('currentSong', song);
     }, this);
 
-    this.get('songQueue').on('dequeue', function(song) {
+    this.get('songQueue').on('dequeue reset', function(song) {
       // if we are dequeuing the last song, set current song to null to stop the player
       if (this.get('songQueue').length === 0) {
         this.set('currentSong', null);
