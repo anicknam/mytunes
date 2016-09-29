@@ -5,7 +5,8 @@ var LibraryView = Backbone.View.extend({
 
   initialize: function() {
     this.render();
-
+    this.collection.on('add', this.render, this);
+    this.collection.fetch({ url:'https://api.parse.com/1/classes/songs/' });
   },
 
   render: function() {
