@@ -16,7 +16,9 @@ html {
 }
 
 audio {
+  height: 40px;
   width: 60%;
+  margin-bottom: 1em;
 }
 
 .enqueue-song {
@@ -28,15 +30,15 @@ audio {
   color: rgb(65,174,75);
 }
 
-.clear-queue {
+.clear-queue, .library-sort {
   font-weight: 100;
   font-size: 80%;
   margin-left: 1em;
   color: rgba(174,174,174,0.8);
 }
 
-.clear-queue:hover {
-  color: rgba(150,150,150,1);
+.clear-queue:hover, .library-sort:hover {
+  color: rgba(100,100,100,1);
 }
 
 .move-song-up {
@@ -49,4 +51,8 @@ audio {
 
 .move-song-up, .move-song-down {
   opacity: 0.3;
+}
+
+.library-table, .song-queue-table {
+  text-align: left;
 }

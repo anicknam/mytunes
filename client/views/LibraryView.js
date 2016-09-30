@@ -5,7 +5,13 @@ var LibraryView = Backbone.View.extend({
 
   initialize: function() {
     this.render();
-    this.collection.on('sync', () => this.render(), this);
+    this.collection.on('sync sort', () => this.render(), this);
+  },
+
+  events: {
+    'click .library-sort': function () {
+      this.collection.sortDefault();
+    }
   },
 
   render: function() {
@@ -13,8 +19,13 @@ var LibraryView = Backbone.View.extend({
     // see http://api.jquery.com/detach/
     this.$el.children().detach();
 
-    this.$el.html('<th>Library</th>').append(
+    let sortOrder = this.collection.sortOrder;
+    let sortButton = `<i class="fa fa-sort-alpha-${sortOrder} library-sort" aria-hidden="true"></i>`;
+
+    this.$el.addClass('library-table');
+    this.$el.html(`<th colspan="3">Library${sortButton}</th>`).append(
       this.collection.map(function(song) {
+        // FIXME: why do we re-create this every time we render?
         return new LibraryEntryView({ model: song }).render();
       })
     );

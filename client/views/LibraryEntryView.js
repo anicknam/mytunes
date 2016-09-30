@@ -4,12 +4,17 @@ var LibraryEntryView = Backbone.View.extend({
   tagName: 'tr',
 
   template: _.template(`
-    <td>
+    <td class="table-buttons">
       <i class="fa fa-plus-circle enqueue-song" aria-hidden="true"></i>
+    </td>
+    <td>
       (<%= artist %>)
     </td>
     <td>
       <%= title %>
+    </td>
+    <td>
+      <%= album %>
     </td>`),
 
   events: {
