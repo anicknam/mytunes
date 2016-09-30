@@ -6,10 +6,10 @@ var PlayerView = Backbone.View.extend({
   el: '<audio controls autoplay />',
 
   initialize: function () {
-    this.$el.on('ended', () => this.model.ended() );
+    this.$el.on('ended', () => this.model.dequeue() );
   },
 
-  setSong: function(song) {
+  setSong: function (song) {
     // do not re-render if the song is the same
     if (this.model !== song) {
       this.model = song;
@@ -18,6 +18,7 @@ var PlayerView = Backbone.View.extend({
   },
 
   render: function() {
+    // setting src to empty allows to stop the audio player
     return this.$el.attr('src', this.model ? this.model.get('url') : '');
   }
 

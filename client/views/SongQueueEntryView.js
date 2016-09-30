@@ -23,32 +23,39 @@ var SongQueueEntryView = Backbone.View.extend({
 
   events: {
     'click .remove-song': function () {
+      // dequeue song when remove button is clicked
       this.model.dequeue();
     },
+
     'click .move-song-down': function () {
-      let collection = this.model.collection;
-      if (collection.length > 1) {
-        let index = collection.indexOf(this.model);
-        let newIndex = (index + 1) % collection.length;
-        this.model.dequeue();
-        collection.add(this.model, { at: newIndex });
-      }
+      // move song down (loop around) when move down button is clicked
+      this.moveSong('down', this.model);
     },
+
     'click .move-song-up': function () {
-      let collection = this.model.collection;
-      if (collection.length > 1) {
-        let index = collection.indexOf(this.model);
-        let newIndex = (index - 1 + collection.length) % collection.length;
-        this.model.dequeue();
-        collection.add(this.model, { at: newIndex });
-      }
+      // move song up (loop around) when move up button is clicked
+      this.moveSong('up', this.model);
     }
   },
 
-  initialize: function () {
+  moveSong: function (direction, song) {
+    // move the song up/down the queue (and loop around)
+    //   do not move the song if it's the only one
+    //   dequeue the song and insert it back in the right place
+    //   dequeueing the song makes sure that the song at the top of the queue starts playing
+
+    let collection = song.collection; // store collection because we will remove the song from the collection
+    if (collection.length > 1) {
+      let index = collection.indexOf(song);
+      let newIndex = (direction === 'up' ?
+                       index - 1 + collection.length : index + 1) % collection.length;
+      song.dequeue();
+      collection.add(song, { at: newIndex });
+    }
   },
 
   render: function() {
-    return this.$el.html(this.template(this.model.attributes));
+    let $element = this.$el.html(this.template(this.model.attributes));
+    return $element;
   }
 });

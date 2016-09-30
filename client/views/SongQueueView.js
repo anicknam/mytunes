@@ -5,14 +5,19 @@ var SongQueueView = Backbone.View.extend({
 
   initialize: function() {
     this.render();
+
+    // render on add/remove/reset
     this.collection.on('add remove reset', this.render, this);
   },
 
   events: {
     'click .clear-queue': 'clearQueue'
+    // this is the same as writing:
+    // 'click .clear-queue': () => this.clearQueue()
   },
 
   clearQueue: function () {
+    // empty collection
     this.collection.reset();
   },
 
@@ -22,7 +27,9 @@ var SongQueueView = Backbone.View.extend({
     this.$el.children().detach();
 
     this.$el.addClass('song-queue-table');
-    this.$el.html('<th colspan="3">Song Queue<span class="clear-queue">Clear all</span></th>').append(
+    this.$el.html(`<th colspan="3">Song Queue
+                     <span class="clear-queue">Clear all</span>
+                   </th>`).append(
       this.collection.map(function(song) {
         // FIXME: why do we re-create this every time we render?
         return new SongQueueEntryView({ model: song }).render();

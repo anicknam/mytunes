@@ -18,9 +18,12 @@ var LibraryEntryView = Backbone.View.extend({
     </td>`),
 
   events: {
-    'click .enqueue-song': function() {
-      this.model.enqueue();
-    }
+    // enqueue song when add button is clicked
+    'click .enqueue-song': 'enqueueSong'
+  },
+
+  enqueueSong: function () {
+    this.model.enqueue();
   },
 
   render: function() {

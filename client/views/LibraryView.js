@@ -5,12 +5,16 @@ var LibraryView = Backbone.View.extend({
 
   initialize: function() {
     this.render();
-    this.collection.on('sync sort', () => this.render(), this);
+
+    // render on server sync and sort
+    this.collection.on('sync sort', this.render, this);
   },
 
   events: {
     'click .library-sort': function () {
+      // on sort icon click, sort library and flip sort order
       this.collection.sortDefault();
+      this.collection.sortOrderFlip();
     }
   },
 
@@ -19,6 +23,7 @@ var LibraryView = Backbone.View.extend({
     // see http://api.jquery.com/detach/
     this.$el.children().detach();
 
+    // get sort icon type from sort order var
     let sortOrder = this.collection.sortOrder;
     let sortButton = `<i class="fa fa-sort-alpha-${sortOrder} library-sort" aria-hidden="true"></i>`;
 
